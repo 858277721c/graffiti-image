@@ -122,6 +122,15 @@ public class GraffitiImageView extends View
     }
 
     /**
+     * 清空所有组
+     */
+    public void clearGroups()
+    {
+        mGroups.clear();
+        notifyGroupSizeIfNeed();
+    }
+
+    /**
      * 返回一共有几组
      *
      * @return
