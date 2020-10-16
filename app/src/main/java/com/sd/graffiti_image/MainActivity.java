@@ -55,9 +55,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBinding.viewGraffitiGesture.getGraffitiImageView().setGroupCountCallback(new GraffitiImageView.GroupCountCallback()
         {
             @Override
-            public void onGroupCountChanged(int count)
+            public void onGroupCountChanged(int oldCount, int newCount)
             {
-                Log.i(TAG, "onGroupCountChanged:" + count);
+                Log.i(TAG, "onGroupCountChanged oldCount:" + oldCount + " newCount:" + newCount);
             }
         });
         mBinding.viewGraffitiGesture.getGraffitiImageView().setAnimatorCallback(new GraffitiImageView.AnimatorCallback()

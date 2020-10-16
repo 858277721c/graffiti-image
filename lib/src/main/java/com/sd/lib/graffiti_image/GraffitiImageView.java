@@ -276,12 +276,13 @@ public class GraffitiImageView extends View
 
     private void notifyGroupCountIfNeed()
     {
-        final int count = mGroupHolder.size();
-        if (mGroupCount != count)
+        final int oldCount = mGroupCount;
+        final int newCount = mGroupHolder.size();
+        if (oldCount != newCount)
         {
-            mGroupCount = count;
+            mGroupCount = newCount;
             if (mGroupCountCallback != null)
-                mGroupCountCallback.onGroupCountChanged(count);
+                mGroupCountCallback.onGroupCountChanged(oldCount, newCount);
         }
     }
 
@@ -737,6 +738,6 @@ public class GraffitiImageView extends View
 
     public interface GroupCountCallback
     {
-        void onGroupCountChanged(int count);
+        void onGroupCountChanged(int oldCount, int newCount);
     }
 }
