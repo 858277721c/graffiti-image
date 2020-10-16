@@ -78,9 +78,9 @@ public class GraffitiImageGestureLayout extends FrameLayout
         final GraffitiImageView.Group group = mCallback.createGroup();
         final GraffitiImageView.Item item = new GraffitiImageView.Item(event.getX(), event.getY());
 
-        mCallback.onCreateItem(item);
         group.addItem(item);
         mCurrentGroup = group;
+        mCallback.onItemCreate(item);
 
         mGraffitiImageView.addGroup(group);
         mGraffitiImageView.showGraffiti();
@@ -120,9 +120,9 @@ public class GraffitiImageGestureLayout extends FrameLayout
             if (mCallback.canAddItem())
             {
                 final GraffitiImageView.Item item = new GraffitiImageView.Item(point[0], point[1]);
-
-                mCallback.onCreateItem(item);
                 group.addItem(item);
+                mCallback.onItemCreate(item);
+
                 mGraffitiImageView.showGraffiti();
             } else
             {
@@ -233,7 +233,7 @@ public class GraffitiImageGestureLayout extends FrameLayout
 
         public abstract GraffitiImageView.Group createGroup();
 
-        public void onCreateItem(GraffitiImageView.Item item)
+        public void onItemCreate(GraffitiImageView.Item item)
         {
         }
     }
