@@ -36,14 +36,14 @@ public class GraffitiImageView extends View
 
     private Mode mMode = Mode.draw;
     private final List<Group> mGroups = new ArrayList<>();
-    private int mGroupSize;
+    private int mGroupCount;
 
     private Integer mBoundsWidth;
     private Integer mBoundsHeight;
 
     private GraffitiAnimator mGraffitiAnimator;
 
-    private GroupSizeChangeCallback mGroupSizeChangeCallback;
+    private GroupCountCallback mGroupCountCallback;
     private AnimatorCallback mAnimatorCallback;
 
     /**
@@ -51,9 +51,9 @@ public class GraffitiImageView extends View
      *
      * @param callback
      */
-    public void setGroupSizeChangeCallback(GroupSizeChangeCallback callback)
+    public void setGroupCountCallback(GroupCountCallback callback)
     {
-        mGroupSizeChangeCallback = callback;
+        mGroupCountCallback = callback;
     }
 
     /**
@@ -91,7 +91,7 @@ public class GraffitiImageView extends View
         if (group == null)
             return;
         mGroups.add(group);
-        notifyGroupSizeIfNeed();
+        notifyGroupCountIfNeed();
     }
 
     /**
@@ -106,7 +106,7 @@ public class GraffitiImageView extends View
 
         mGroups.clear();
         mGroups.addAll(list);
-        notifyGroupSizeIfNeed();
+        notifyGroupCountIfNeed();
     }
 
     /**
@@ -118,7 +118,7 @@ public class GraffitiImageView extends View
             return;
 
         mGroups.remove(mGroups.size() - 1);
-        notifyGroupSizeIfNeed();
+        notifyGroupCountIfNeed();
     }
 
     /**
@@ -127,7 +127,7 @@ public class GraffitiImageView extends View
     public void clearGroups()
     {
         mGroups.clear();
-        notifyGroupSizeIfNeed();
+        notifyGroupCountIfNeed();
     }
 
     /**
@@ -264,14 +264,14 @@ public class GraffitiImageView extends View
         canvas.drawBitmap(bitmap, left, top, null);
     }
 
-    private void notifyGroupSizeIfNeed()
+    private void notifyGroupCountIfNeed()
     {
         final int size = mGroups.size();
-        if (mGroupSize != size)
+        if (mGroupCount != size)
         {
-            mGroupSize = size;
-            if (mGroupSizeChangeCallback != null)
-                mGroupSizeChangeCallback.onGroupSizeChanged(size);
+            mGroupCount = size;
+            if (mGroupCountCallback != null)
+                mGroupCountCallback.onGroupCountChanged(size);
         }
     }
 
@@ -698,8 +698,8 @@ public class GraffitiImageView extends View
         void onAnimationEnd();
     }
 
-    public interface GroupSizeChangeCallback
+    public interface GroupCountCallback
     {
-        void onGroupSizeChanged(int size);
+        void onGroupCountChanged(int count);
     }
 }

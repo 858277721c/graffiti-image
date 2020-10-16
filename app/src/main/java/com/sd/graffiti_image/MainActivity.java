@@ -1,12 +1,12 @@
 package com.sd.graffiti_image;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.sd.graffiti_image.databinding.ActivityMainBinding;
 import com.sd.lib.graffiti_image.GraffitiImageGestureLayout;
@@ -52,12 +52,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        mBinding.viewGraffitiGesture.getGraffitiImageView().setGroupSizeChangeCallback(new GraffitiImageView.GroupSizeChangeCallback()
+        mBinding.viewGraffitiGesture.getGraffitiImageView().setGroupCountCallback(new GraffitiImageView.GroupCountCallback()
         {
             @Override
-            public void onGroupSizeChanged(int size)
+            public void onGroupCountChanged(int count)
             {
-                Log.i(TAG, "onGroupSizeChanged size:" + size);
+                Log.i(TAG, "onGroupCountChanged:" + count);
             }
         });
         mBinding.viewGraffitiGesture.getGraffitiImageView().setAnimatorCallback(new GraffitiImageView.AnimatorCallback()
