@@ -135,7 +135,7 @@ public class GraffitiImageView extends View
      *
      * @return
      */
-    public int groupCount()
+    public int getGroupCount()
     {
         return mGroups.size();
     }
@@ -145,7 +145,7 @@ public class GraffitiImageView extends View
      *
      * @return
      */
-    public int itemCount()
+    public int getItemCount()
     {
         if (mGroups.isEmpty())
             return 0;

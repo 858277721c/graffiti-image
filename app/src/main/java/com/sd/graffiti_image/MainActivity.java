@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public boolean canAddItem()
             {
-                final int itemCount = mBinding.viewGraffitiGesture.getGraffitiImageView().itemCount();
+                final int itemCount = mBinding.viewGraffitiGesture.getGraffitiImageView().getItemCount();
                 Log.i(TAG, "canAddItem count:" + itemCount);
                 if (itemCount >= 100)
                 {
