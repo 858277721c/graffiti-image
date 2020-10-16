@@ -549,6 +549,8 @@ public class GraffitiImageView extends View
         private long itemDuration = 100;
         private int itemSpacing;
 
+        private Object extra;
+
         public Group(Bitmap bitmap)
         {
             this.bitmap = bitmap;
@@ -559,6 +561,11 @@ public class GraffitiImageView extends View
             if (items == null)
                 items = new ArrayList<>();
             return items;
+        }
+
+        public void setExtra(Object extra)
+        {
+            this.extra = extra;
         }
 
         /**
