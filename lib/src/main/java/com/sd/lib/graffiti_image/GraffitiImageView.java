@@ -677,7 +677,12 @@ public class GraffitiImageView extends View
             return y;
         }
 
-        Bitmap getBitmap()
+        public Group getGroup()
+        {
+            return group;
+        }
+
+        private Bitmap getBitmap()
         {
             Bitmap result = group == null ? null : group.bitmap;
             if (bitmap != null)
