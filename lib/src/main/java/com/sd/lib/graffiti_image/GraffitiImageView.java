@@ -345,9 +345,11 @@ public class GraffitiImageView extends View
             }
         }
 
-        private void startAnimator(Animator animator)
+        private void startAnimator(Animator animator, AnimatorMode animatorMode)
         {
             mAnimator = animator;
+            mAnimatorMode = animatorMode;
+
             mAnimator.addListener(new AnimatorListenerAdapter()
             {
                 @Override
@@ -406,8 +408,7 @@ public class GraffitiImageView extends View
             final AnimatorSet animatorSet = new AnimatorSet();
             animatorSet.playSequentially(listGroupAnimator);
 
-            mAnimatorMode = AnimatorMode.group;
-            startAnimator(animatorSet);
+            startAnimator(animatorSet, AnimatorMode.group);
         }
 
         /**
@@ -438,8 +439,7 @@ public class GraffitiImageView extends View
             animator.setDuration(duration);
 
             mListDurationItem = listItem;
-            mAnimatorMode = AnimatorMode.duration;
-            startAnimator(animator);
+            startAnimator(animator, AnimatorMode.duration);
         }
 
         /**
