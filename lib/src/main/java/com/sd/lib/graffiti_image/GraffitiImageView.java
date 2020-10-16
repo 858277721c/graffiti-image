@@ -145,7 +145,7 @@ public class GraffitiImageView extends View
      *
      * @return
      */
-    public int itemSize()
+    public int itemCount()
     {
         if (mGroups.isEmpty())
             return 0;
@@ -153,7 +153,7 @@ public class GraffitiImageView extends View
         int size = 0;
         for (Group group : mGroups)
         {
-            size += group.itemSize();
+            size += group.itemCount();
         }
         return size;
     }
@@ -369,11 +369,11 @@ public class GraffitiImageView extends View
             final List<Animator> listGroupAnimator = new ArrayList<>();
             for (final Group group : mGroups)
             {
-                final int itemSize = group.itemSize();
-                if (itemSize <= 0)
+                final int itemCount = group.itemCount();
+                if (itemCount <= 0)
                     continue;
 
-                final ValueAnimator animator = ValueAnimator.ofInt(0, itemSize - 1);
+                final ValueAnimator animator = ValueAnimator.ofInt(0, itemCount - 1);
                 animator.setDuration(group.getGroupDuration());
                 animator.setInterpolator(new LinearInterpolator());
                 animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
@@ -602,7 +602,7 @@ public class GraffitiImageView extends View
          *
          * @return
          */
-        public int itemSize()
+        public int itemCount()
         {
             return items == null ? 0 : items.size();
         }
@@ -614,11 +614,11 @@ public class GraffitiImageView extends View
          */
         public Item lastItem()
         {
-            final int itemSize = itemSize();
-            if (itemSize <= 0)
+            final int itemCount = itemCount();
+            if (itemCount <= 0)
                 return null;
 
-            return items.get(itemSize - 1);
+            return items.get(itemCount - 1);
         }
 
         /**
@@ -628,11 +628,11 @@ public class GraffitiImageView extends View
          */
         public long getGroupDuration()
         {
-            final int itemSize = itemSize();
-            if (itemSize <= 0)
+            final int itemCount = itemCount();
+            if (itemCount <= 0)
                 return 0;
 
-            return itemSize * itemDuration;
+            return itemCount * itemDuration;
         }
     }
 
