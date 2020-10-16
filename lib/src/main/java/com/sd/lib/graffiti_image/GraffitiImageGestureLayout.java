@@ -76,6 +76,9 @@ public class GraffitiImageGestureLayout extends FrameLayout
             return;
 
         final GraffitiImageView.Group group = mCallback.createGroup();
+        if (group == null)
+            return;
+
         final GraffitiImageView.Item item = new GraffitiImageView.Item(event.getX(), event.getY());
 
         group.addItem(item);
