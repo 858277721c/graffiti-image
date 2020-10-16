@@ -150,12 +150,12 @@ public class GraffitiImageView extends View
         if (mGroups.isEmpty())
             return 0;
 
-        int size = 0;
+        int count = 0;
         for (Group group : mGroups)
         {
-            size += group.itemCount();
+            count += group.itemCount();
         }
-        return size;
+        return count;
     }
 
     /**
@@ -266,12 +266,12 @@ public class GraffitiImageView extends View
 
     private void notifyGroupCountIfNeed()
     {
-        final int size = mGroups.size();
-        if (mGroupCount != size)
+        final int count = mGroups.size();
+        if (mGroupCount != count)
         {
-            mGroupCount = size;
+            mGroupCount = count;
             if (mGroupCountCallback != null)
-                mGroupCountCallback.onGroupCountChanged(size);
+                mGroupCountCallback.onGroupCountChanged(count);
         }
     }
 
