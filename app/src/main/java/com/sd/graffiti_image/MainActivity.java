@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public boolean canAddItem()
             {
-                final int itemSize = mBinding.viewGraffitiGesture.getGraffitiImageView().itemCount();
-                Log.i(TAG, "canAddItem size:" + itemSize);
-                if (itemSize >= 100)
+                final int itemCount = mBinding.viewGraffitiGesture.getGraffitiImageView().itemCount();
+                Log.i(TAG, "canAddItem size:" + itemCount);
+                if (itemCount >= 100)
                 {
                     Toast.makeText(MainActivity.this, "too much item", Toast.LENGTH_SHORT).show();
                     return false;
