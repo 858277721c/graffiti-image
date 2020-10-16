@@ -35,7 +35,7 @@ public class GraffitiImageView extends View
     }
 
     private Mode mMode = Mode.draw;
-    private final List<Group> mGroups = new ArrayList<>();
+    private final List<Group> mGroupHolder = new ArrayList<>();
     private int mGroupCount;
 
     private Integer mBoundsWidth;
@@ -90,7 +90,7 @@ public class GraffitiImageView extends View
     {
         if (group == null)
             return;
-        mGroups.add(group);
+        mGroupHolder.add(group);
         notifyGroupCountIfNeed();
     }
 
@@ -104,8 +104,8 @@ public class GraffitiImageView extends View
         if (list == null || list.isEmpty())
             return;
 
-        mGroups.clear();
-        mGroups.addAll(list);
+        mGroupHolder.clear();
+        mGroupHolder.addAll(list);
         notifyGroupCountIfNeed();
     }
 
@@ -114,10 +114,10 @@ public class GraffitiImageView extends View
      */
     public void removeLastGroup()
     {
-        if (mGroups.isEmpty())
+        if (mGroupHolder.isEmpty())
             return;
 
-        mGroups.remove(mGroups.size() - 1);
+        mGroupHolder.remove(mGroupHolder.size() - 1);
         notifyGroupCountIfNeed();
     }
 
@@ -126,8 +126,18 @@ public class GraffitiImageView extends View
      */
     public void clearGroups()
     {
-        mGroups.clear();
+        mGroupHolder.clear();
         notifyGroupCountIfNeed();
+    }
+
+    /**
+     * 返回所有组
+     *
+     * @return
+     */
+    public List<Group> getGroups()
+    {
+        return new ArrayList<>(mGroupHolder);
     }
 
     /**
@@ -137,7 +147,7 @@ public class GraffitiImageView extends View
      */
     public int getGroupCount()
     {
-        return mGroups.size();
+        return mGroupHolder.size();
     }
 
     /**
@@ -147,11 +157,11 @@ public class GraffitiImageView extends View
      */
     public int getItemCount()
     {
-        if (mGroups.isEmpty())
+        if (mGroupHolder.isEmpty())
             return 0;
 
         int count = 0;
-        for (Group group : mGroups)
+        for (Group group : mGroupHolder)
         {
             count += group.itemCount();
         }
@@ -236,7 +246,7 @@ public class GraffitiImageView extends View
 
     private void drawDrawMode(Canvas canvas, int width, int height)
     {
-        for (Group group : mGroups)
+        for (Group group : mGroupHolder)
         {
             for (Item item : group.getItems())
             {
@@ -266,7 +276,7 @@ public class GraffitiImageView extends View
 
     private void notifyGroupCountIfNeed()
     {
-        final int count = mGroups.size();
+        final int count = mGroupHolder.size();
         if (mGroupCount != count)
         {
             mGroupCount = count;
@@ -321,7 +331,7 @@ public class GraffitiImageView extends View
          */
         public void start()
         {
-            if (mGroups.isEmpty())
+            if (mGroupHolder.isEmpty())
                 return;
 
             stop();
@@ -367,7 +377,7 @@ public class GraffitiImageView extends View
         private void startAnimatorByGroup()
         {
             final List<Animator> listGroupAnimator = new ArrayList<>();
-            for (final Group group : mGroups)
+            for (final Group group : mGroupHolder)
             {
                 final int itemCount = group.itemCount();
                 if (itemCount <= 0)
@@ -406,7 +416,7 @@ public class GraffitiImageView extends View
         private void startAnimatorByDuration(long duration)
         {
             final List<Item> listItem = new ArrayList<>();
-            for (final Group group : mGroups)
+            for (final Group group : mGroupHolder)
             {
                 listItem.addAll(group.getItems());
             }
@@ -462,7 +472,7 @@ public class GraffitiImageView extends View
             if (mCurrentGroup == null)
                 return;
 
-            for (Group group : mGroups)
+            for (Group group : mGroupHolder)
             {
                 if (group == mCurrentGroup)
                 {
