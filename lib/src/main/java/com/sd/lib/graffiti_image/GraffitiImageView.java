@@ -573,6 +573,21 @@ public class GraffitiImageView extends View
             return items;
         }
 
+        /**
+         * 返回设置的附加数据
+         *
+         * @return
+         */
+        public Object getExtra()
+        {
+            return extra;
+        }
+
+        /**
+         * 设置附加数据
+         *
+         * @param extra
+         */
         public void setExtra(Object extra)
         {
             this.extra = extra;
