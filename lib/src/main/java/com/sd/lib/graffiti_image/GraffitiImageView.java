@@ -38,9 +38,6 @@ public class GraffitiImageView extends View
     private final List<Group> mGroupHolder = new ArrayList<>();
     private int mGroupCount;
 
-    private Integer mBoundsWidth;
-    private Integer mBoundsHeight;
-
     private GraffitiAnimator mGraffitiAnimator;
 
     private GroupCountCallback mGroupCountCallback;
@@ -64,21 +61,6 @@ public class GraffitiImageView extends View
     public void setAnimatorCallback(AnimatorCallback callback)
     {
         mAnimatorCallback = callback;
-    }
-
-    /**
-     * 设置Item的边界大小。
-     * <p>
-     * 1.如果为null，则边界大小为当前View的边界大小
-     * 2.如果不为null，则Item的坐标会根据指定的边界大小计算出百分比之后，映射到当前View的边界内
-     *
-     * @param boundsWidth
-     * @param boundsHeight
-     */
-    public void setItemBounds(Integer boundsWidth, Integer boundsHeight)
-    {
-        mBoundsWidth = boundsWidth;
-        mBoundsHeight = boundsHeight;
     }
 
     /**
@@ -208,24 +190,6 @@ public class GraffitiImageView extends View
         }
     }
 
-    private int getBoundsWidth()
-    {
-        int result = getWidth();
-        if (mBoundsWidth != null && mBoundsWidth > 0)
-            result = mBoundsWidth;
-
-        return result;
-    }
-
-    private int getBoundsHeight()
-    {
-        int result = getHeight();
-        if (mBoundsHeight != null && mBoundsHeight > 0)
-            result = mBoundsHeight;
-
-        return result;
-    }
-
     @Override
     protected void onDraw(Canvas canvas)
     {
@@ -265,8 +229,8 @@ public class GraffitiImageView extends View
     private void drawItem(Item item, Canvas canvas, int width, int height)
     {
         final Bitmap bitmap = item.getBitmap();
-        final float transformLeft = item.x / getBoundsWidth() * width;
-        final float transformTop = item.y / getBoundsHeight() * height;
+        final float transformLeft = item.x;
+        final float transformTop = item.y;
 
         final float left = transformLeft - (bitmap.getWidth() / 2);
         final float top = transformTop - (bitmap.getHeight() / 2);
