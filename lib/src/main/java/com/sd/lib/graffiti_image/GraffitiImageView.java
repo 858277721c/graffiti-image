@@ -567,7 +567,12 @@ public class GraffitiImageView extends View
             this.bitmap = bitmap;
         }
 
-        private List<Item> getItems()
+        /**
+         * 返回所有Item
+         *
+         * @return
+         */
+        public List<Item> getItems()
         {
             if (items == null)
                 items = new ArrayList<>();
