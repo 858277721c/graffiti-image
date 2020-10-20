@@ -34,7 +34,7 @@ public class GraffitiImageView extends View
         super(context, attrs, defStyleAttr);
     }
 
-    private Mode mMode = Mode.draw;
+    private Mode mMode;
     private final List<Group> mGroupHolder = new ArrayList<>();
     private int mGroupCount;
 
@@ -176,7 +176,7 @@ public class GraffitiImageView extends View
      *
      * @param mode
      */
-    private void setMode(Mode mode)
+    public void setMode(Mode mode)
     {
         if (mode == null)
             return;
@@ -184,7 +184,6 @@ public class GraffitiImageView extends View
         if (mMode != mode)
         {
             mMode = mode;
-
             if (mode == Mode.draw)
                 stopGraffitiAnimator();
         }
@@ -204,6 +203,9 @@ public class GraffitiImageView extends View
             } else if (mMode == Mode.animator)
             {
                 drawAnimatorMode(canvas, width, height);
+            } else
+            {
+
             }
         }
     }
