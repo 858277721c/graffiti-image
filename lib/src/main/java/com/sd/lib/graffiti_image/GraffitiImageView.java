@@ -296,19 +296,18 @@ public class GraffitiImageView extends View
         /**
          * 开始动画
          */
-        public void start()
+        public boolean start()
         {
             if (mGroupHolder.isEmpty())
-                return;
+                return false;
 
             stop();
-
             if (mDuration == null)
             {
-                startAnimatorByGroup();
+                return startAnimatorByGroup();
             } else
             {
-                startAnimatorByDuration(mDuration);
+                return startAnimatorByDuration(mDuration);
             }
         }
 
@@ -342,8 +341,10 @@ public class GraffitiImageView extends View
 
         /**
          * 开始动画（组动画模式）
+         *
+         * @return
          */
-        private void startAnimatorByGroup()
+        private boolean startAnimatorByGroup()
         {
             final List<Animator> listGroupAnimator = new ArrayList<>();
             for (final Group group : mGroupHolder)
@@ -370,18 +371,22 @@ public class GraffitiImageView extends View
             }
 
             if (listGroupAnimator.isEmpty())
-                return;
+                return false;
 
             final AnimatorSet animatorSet = new AnimatorSet();
             animatorSet.playSequentially(listGroupAnimator);
 
             startAnimator(animatorSet, AnimatorMode.group);
+            return true;
         }
 
         /**
          * 开始动画（总时长模式）
+         *
+         * @param duration
+         * @return
          */
-        private void startAnimatorByDuration(long duration)
+        private boolean startAnimatorByDuration(long duration)
         {
             final List<Item> listItem = new ArrayList<>();
             for (final Group group : mGroupHolder)
@@ -390,7 +395,7 @@ public class GraffitiImageView extends View
             }
 
             if (listItem.isEmpty())
-                return;
+                return false;
 
             final ValueAnimator animator = ValueAnimator.ofInt(0, listItem.size() - 1);
             animator.setInterpolator(new LinearInterpolator());
@@ -407,6 +412,7 @@ public class GraffitiImageView extends View
 
             mListDurationItem = listItem;
             startAnimator(animator, AnimatorMode.duration);
+            return true;
         }
 
         /**
