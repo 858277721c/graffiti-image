@@ -29,6 +29,8 @@ public class GraffitiImageGestureLayout extends FrameLayout
     private GraffitiImageView mGraffitiImageView;
     private GraffitiImageView.Group mCurrentGroup;
 
+    /** 是否限制触摸边界 */
+    private boolean mLimitTouchBounds = true;
     private Callback mCallback;
 
     /**
@@ -39,6 +41,16 @@ public class GraffitiImageGestureLayout extends FrameLayout
     public void setCallback(Callback callback)
     {
         mCallback = callback;
+    }
+
+    /**
+     * 设置是否限制触摸边界
+     *
+     * @param limit
+     */
+    public void setLimitTouchBounds(boolean limit)
+    {
+        mLimitTouchBounds = limit;
     }
 
     public GraffitiImageView getGraffitiImageView()
@@ -107,10 +119,20 @@ public class GraffitiImageGestureLayout extends FrameLayout
             return;
         }
 
-        final float lastX = lastItem.getX();
-        final float lastY = lastItem.getY();
         final float x = event.getX();
         final float y = event.getY();
+        if (mLimitTouchBounds)
+        {
+            if (x < 0 || x > getWidth())
+                return;
+
+            if (y < 0 || y > getHeight())
+                return;
+        }
+
+        final float lastX = lastItem.getX();
+        final float lastY = lastItem.getY();
+
         final int stepX = lastItem.getHorizontalSpacing();
         final int stepY = lastItem.getVerticalSpacing();
 
